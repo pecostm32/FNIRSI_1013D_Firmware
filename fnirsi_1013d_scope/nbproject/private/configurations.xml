@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+            <option name="debug_command"
+                    value="../../FNIRSI-1013D/Scope_Signal_Handling_Development/dist/Debug/GNU-Linux/scope_signal_handling_development"/>
+            <option name="debug_dir"
+                    value="/home/peter/Data/NetbeansProjects/FNIRSI-1013D/Scope_Signal_Handling_Development"/>
+            <option name="symbol_file"
+                    value="/home/peter/Data/NetbeansProjects/FNIRSI-1013D/Scope_Signal_Handling_Development/dist/Debug/GNU-Linux/scope_signal_handling_development"/>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>/usr/bin/arm-none-eabi-objcopy -S -O binary ${OUTPUT_PATH} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin
+
+ st-flash write ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin 0x08000000</runcommandpicklistitem>
+          <runcommandpicklistitem>/usr/bin/arm-none-eabi-objcopy -S -O binary ${OUTPUT_PATH} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin   st-flash write ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin 0x08000000</runcommandpicklistitem>
+          <runcommandpicklistitem> st-flash write ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin 0x08000000</runcommandpicklistitem>
+          <runcommandpicklistitem>st-flash write ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld.bin 0x08000000
+</runcommandpicklistitem>
+          <runcommandpicklistitem>openocd -f STM32F103C8T6.cfg -c init -c targets -c halt -c "flash write_image erase ${OUTPUT_PATH}" -c "verify_image ${OUTPUT_PATH}" -c "reset run" -c shutdown</runcommandpicklistitem>
+          <runcommandpicklistitem>openocd -f STM32F103C8T6.cfg -c init -c targets -c halt -c "flash write_image erase ${OUTPUT_PATH}" -c "verify_image ${OUTPUT_PATH}" -c "reset run"</runcommandpicklistitem>
+          <runcommandpicklistitem></runcommandpicklistitem>
+          <runcommandpicklistitem>dist/Debug/GNU-Linux/scope_emulator</runcommandpicklistitem>
+          <runcommandpicklistitem>../../FNIRSI-1013D/Scope_emulator/dist/Debug/GNU-Linux/scope_emulator</runcommandpicklistitem>
+          <runcommandpicklistitem>../../FNIRSI-1013D/Scope_Signal_Handling_Development/dist/Debug/GNU-Linux/scope_signal_handling_development</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>../../FNIRSI-1013D/Scope_Signal_Handling_Development/dist/Debug/GNU-Linux/scope_signal_handling_development</runcommand>
+        <rundir>/home/peter/Data/NetbeansProjects/FNIRSI-1013D/Scope_Signal_Handling_Development</rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir></rundir>
+        <buildfirst>true</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

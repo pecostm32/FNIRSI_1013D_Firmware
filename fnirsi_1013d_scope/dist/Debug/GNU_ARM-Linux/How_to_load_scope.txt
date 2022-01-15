@@ -1,0 +1,37 @@
+===================
+Check if active
+==================
+
+sudo ./sunxi-fel version
+
+===================
+Load to RAM
+==================
+
+sudo ./sunxi-fel -p write 0x7FFFFFE0 fnirsi_1013d_scope.bin exe 0x80000000
+
+
+==================
+Load firmware onto SD card
+==================
+
+sudo umount /dev/sdc1
+
+sudo dd if=fnirsi_1013d.bin of=/dev/sdc bs=1024 seek=8
+
+
+//Display configuration data for shifted display
+sudo dd if=shifted_display_config_sector.bin of=/dev/sdc bs=1024 seek=355
+
+sudo dd if=standard_display_config_sector.bin of=/dev/sdc bs=1024 seek=355
+
+
+===================
+Remove program from SD card
+===================
+
+sudo umount /dev/sdc1
+
+sudo dd if=/dev/zero of=/dev/sdc bs=1024 seek=8 count=1
+
+
