@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.h</itemPath>
+      <itemPath>ccu_control.h</itemPath>
+      <itemPath>dram_control.h</itemPath>
+      <itemPath>gpio_control.h</itemPath>
+      <itemPath>types.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.c</itemPath>
+      <itemPath>ccu_control.c</itemPath>
+      <itemPath>dram_control.c</itemPath>
+      <itemPath>fnirsi_1013d_sd_card_bootloader.c</itemPath>
+      <itemPath>memcmp.s</itemPath>
+      <itemPath>memcpy.s</itemPath>
+      <itemPath>memset.s</itemPath>
+      <itemPath>start.s</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>fnirsi_1013d.ld</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="1">
+      <toolsSet>
+        <compilerSet>GNU_ARM|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <commandLine>-Wall -Wno-write-strings -Wno-char-subscripts -fno-stack-protector -DNO_STDLIB=1 -mcpu='arm926ej-s' -O0</commandLine>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </cTool>
+        <ccTool>
+          <useLinkerLibraries>false</useLinkerLibraries>
+        </ccTool>
+        <asmTool>
+          <commandlineTool>arm-none-eabi-gcc</commandlineTool>
+          <commandLine>-x assembler-with-cpp -c -O0 -mcpu='arm926ej-s' -mthumb -Wall -fmessage-length=0</commandLine>
+        </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/fnirsi_1013d_sd_card_bootloader.elf</output>
+          <commandlineTool>arm-none-eabi-gcc</commandlineTool>
+          <commandLine>-T./fnirsi_1013d.ld -nostdlib -lgcc</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="ccu_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ccu_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="dram_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dram_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fnirsi_1013d_sd_card_bootloader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="memcmp.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="memcpy.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="memset.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="start.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="types.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="1">
+      <toolsSet>
+        <compilerSet>GNU|GNU</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <commandlineTool>arm-none-eabi-gcc</commandlineTool>
+          <commandLine>-Wall -Wno-write-strings -Wno-char-subscripts -fno-stack-protector -DNO_STDLIB=1 -O3 -mcpu=cortex-m3 -mthumb</commandLine>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <commandlineTool>arm-none-eabi-gcc</commandlineTool>
+          <commandLine>-T./stm32f103-64k.ld -nostdlib</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="ccu_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="ccu_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="dram_control.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="dram_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="fnirsi_1013d_sd_card_bootloader.c" ex="false" tool="0" flavor2="0">
+      </item>
+      <item path="gpio_control.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="memcmp.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="memcpy.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="memset.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="start.s" ex="false" tool="4" flavor2="0">
+      </item>
+      <item path="types.h" ex="false" tool="3" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
