@@ -1,0 +1,250 @@
+----------------------------------------------------------------------------------------------------------------------------------
+
+Wireshark filter
+reject keyboard and mouse
+!(usb.dst == "1.2.1")  && !(usb.src == "1.2.1")  &&!(usb.dst == "1.2.2") && !(usb.src == "1.2.2") && !(usb.dst == "1.2.3") && !(usb.src == "1.2.3")
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+USB sticks in bakje rechter plank achterin 3de rij van rechts
+Scope ligt in rechter deel van linker kast
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+For a new FPGA programming it needs to be possible to calibrate the two ADC's to match each other. With nothing connected the readings should he the same.
+If not have the FPGA correct one of them
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+!!!! First byte of full flash file read is corrupted. 0x00 instead of 0x06 !!!!
+
+Byte on 0x1FD078 is also different, but this is a setting so possible it changed in between. 0x3B vs 0x64
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+The linux image that works uses a fat16 partition of 8Mib with the boot and lba flags set. It has a second partition that is ext4 and holds the rootfs
+Can I make a card that boots with a bit of unallocated space and a partition that is fat32. Yes!!
+Need to figure out how this works. Boot loader needs to be present at location 0x2000 on the card.
+
+Need to figure out if it is possible to make a boot loader that is less then 32KB with the use of FatFs to read from the SD card. Otherwise raw SD card reading can be done,
+but this means the actual program code must be on a fixed location on the card.
+
+Still some funny business going on. The 4GB SD card that works with the HDD bay won't work in the scope????
+Might have to do with the type of the card. Check the SD card code on the different types and handling of it.
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+https://superuser.com/questions/610819/how-to-resize-img-file-created-with-dd
+
+Resizing a raw disk image file
+1) sudo losetup -f                                             (find a free loop device)
+2) sudo losetup /dev/loop0 sd_card.img                         (Setup the image as a loop device)
+3) sudo partprobe /dev/loop0                                   (Hook in the partitions. This will mount them if possible)
+4) sudo umount /dev/loop0p1                                    (Unmount the partition(s))
+5) sudo gparted /dev/loop0                                     (Start gparted for manipulating the partition)
+6) sudo losetup -d /dev/loop0                                  (Remove the loop device used)
+7) fdisk -l new_scope_sd_card.img                              (Get image file partition information to find the last byte used (7411711))
+8) truncate --size=$[(7411711+1)*512] new_scope_sd_card.img    (Truncate the file to remove the not used part)
+9) sudo chown peter new_scope_sd_card.img                      (Turn the file over to user, also need to do the group???? (chown [OPTIONS] USER[:GROUP] FILE(s)))
+
+Clear the brom boot region (Fails???)
+sudo dd if=/dev/zero of=/dev/sdc bs=1024 seek=8 count=1
+
+Make sure to unmount the /dev/sdc1 partition first!!!!
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Steps for making the FNIRSI-1013D firmware backup on a Linux machine
+
+Connect the scope to the computer via USB
+Turn on the scope and start the USB connection via the main menu option
+Wait until the file manager window opens (Only if auto mount is working properly)
+Close the file manager window
+Open a terminal window (ctrl + alt + t) and type the "lsblk" command (!do not use the quotes!) and check which device the scope is on. (~8GB disk)
+Copy the files from the card to have a backup on your computer
+Unmount this device ("sudo umount /dev/sdc1" in my case)
+Just to be more safe make a backup with dd. ("sudo dd bs=4M if=/dev/sdc of=sd_card_backup.bin" again in my case)
+Open gparted and check if the device is properly formated. (Use right mouse and information to see the sector info)
+If not delete the partition and make a new one leaving 1M free at the start. Format is fat32.
+Use dd to place the backup package on the SD card. ("sudo dd if=fnirsi_1013d_fwb.bin of=/dev/sdc bs=1024 seek=8")
+This will re-mount the partition.
+Unmount this device again ("sudo umount /dev/sdc1" in my case)
+Turn of the scope and turn it back on. This will start the backup process.
+Wait until it is done and the scope is mounted again. File manager window should open after a while.
+Copy the three files to the computer (FNIRSI_1013D_full_flash_backup.bin, FNIRSI_1013D_tp_config.bin, FWB_FSI_1013.bin)
+Turn off the scope and turn it back on. It should start normally.
+
+When the scope showed the "!! special touch panel detected !!" message please upload the "FNIRSI_1013D_tp_config.bin" file in this thread.
+
+If your scope uses a smaller SD card be warned that this is not tested yet. Only 8GB cards have been tested.
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+To see the sizes of different parts in the code use "size xxx.elf"
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+cleaned up:
+fpga_control
+variables (still need to look at used fonts and icons)
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+To do for the firmware backup!!!
+
+
+Use my own backup startup image!!! (Green screen without signals, grid lines and sCOPE text. Leave PECOs text and add firmware backup under it)
+
+Init the scope to be able to display data and support touch.
+
+!! Modify the touch handler to not load a default configuration, but first read the existing config and only make changes for the resolution !!
+
+Check the touch panel config on being the one I need and show this on the display if so
+
+Save the touch panel configuration to the SD card
+
+Save the flash to the SD card
+
+Create a firmware update file, but do not use the correct file name. Check if long file name support works.
+
+Display a message all saved successfully or not in case of error
+
+Clear the brom boot sector to let the scope return to normal operation
+
+Needed files:
+
+fnirisi_1013d_firmware_backup
+
+ccu_control
+diskio
+display_control
+display_lib
+ff
+ffunicode
+fpga_control
+fonts
+icons
+interrupt
+mass_storage_class
+sd_card_interface
+sin_cos_math
+spi_control
+timer
+touchpanel
+usb_interface
+asm files for div functions and startup
+
+
+Maybe parts from:
+scope_functions
+statemachine
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+Needed to get things running is a SD card boot loader!!!!!!
+
+
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+    
+  //Delete the file if it exists
+  f_unlink( "FNIRSI_1013D_full_flash_backup.bin");
+  
+  //Create a file for the full flash backup. Fails if it already exists
+  if(f_open(&fp, "FNIRSI_1013D_full_flash_backup.bin", FA_CREATE_NEW | FA_WRITE | FA_READ) != FR_OK)
+  {
+    //Error message in red
+    display_set_fg_color(0x00FF0000);
+    display_text(20, 351, "ERROR CREATING FULL FLASH BACKUP FILE");
+
+    //Signal failure
+    status = -1;
+  }
+  //Write the full flash backup to the sd card  
+  else
+  {
+    uint32 address = 0;
+
+    display_text(20, 351, "BACKUPING FULL FLASH");
+
+    display_draw_rounded_rect(320, 348, 261, 30, 4);
+    display_draw_rounded_rect(321, 349, 259, 28, 4);
+    
+    for(block=0;block<128;block++)
+    {
+      //Read a block from the flash
+      sys_spi_flash_read(address, (uint8 *)flashbuffer, blocksize);
+      
+      if(f_write(&fp, flashbuffer, blocksize, 0) != FR_OK)
+      {
+        //Clear message part of the screen first
+        display_set_fg_color(0x00307850);
+        display_fill_rect(18, 347, 720, 32);
+        
+        //Error message in red
+        display_set_fg_color(0x00FF0000);
+        display_text(20, 351, "ERROR WRITING FULL FLASH BACKUP FILE");
+
+        //Signal failure
+        status = -1;
+        break;
+      }
+
+      //Switch to other display buffer
+      display_set_screen_buffer(displaybuffer);
+      display_set_source_buffer(displaybuffer);
+      
+      //Update the progress bar
+      display_set_fg_color(0x00307850);
+      display_fill_rect(319, 347, 263, 32);
+      
+      display_set_fg_color(0x00B4FFFE);
+      display_draw_rounded_rect(320, 348, 261, 30, 4);
+      display_draw_rounded_rect(321, 349, 259, 28, 4);
+      display_fill_rounded_rect(324, 352, block * 2, 22, 4);
+      
+      display_set_screen_buffer((uint16 *)maindisplaybuffer);
+      display_copy_rect_to_screen(319, 347, 263, 32);
+
+
+
+
+===============
+Here is the tool plus the steps to make it work.
+
+[size=16pt][color=red]!! I take no responsibility if anything goes wrong !![/color][/size]
+
+Steps for making the FNIRSI-1013D firmware backup on a Linux machine:
+[list type=decimal]
+[li]Connect the scope to the computer via USB.[/li]
+[li]Turn on the scope and start the USB connection via the main menu option.[/li]
+[li]Wait until the file manager window opens. (Only if auto mount is working properly)[/li]
+[li]Close the file manager window.[/li]
+[li]Open a terminal window (ctrl + alt + t) and type the "lsblk" command (!do not use the quotes!) and check which device the scope is on. (~8GB disk)[/li]
+[li]Copy the files from the card to have a backup on your computer.[/li]
+[li][color=red]Un-mount the partition.[/color] ("sudo umount /dev/sdc1" in my case)[/li]
+[li]Just to be more safe make a backup with dd. ("sudo dd bs=4M if=/dev/sdc of=sd_card_backup.bin" again in my case)[/li]
+[li]Open gparted and check if the device is properly formated. (Use right mouse and information to see the sector info)[/li]
+[li]If not delete the partition and make a new one leaving 1M free at the start. Format is fat32.[/li]
+[li]When the partition remounts after the previous step un-mount it again.[/li]
+[li]Use dd to place the backup package on the SD card. ("sudo dd if=fnirsi_1013d_fwb.bin of=/dev/sdc bs=1024 seek=8")[/li]
+[li]This will re-mount the partition. Un-mount the partition again. ("sudo umount /dev/sdc1" in my case)[/li]
+[li]Turn of the scope and turn it back on. This will start the backup process.[/li]
+[li]Wait until it is done and the scope is mounted again. File manager window should open after a while.[/li]
+[li]Copy the three files to the computer. (FNIRSI_1013D_full_flash_backup.bin, FNIRSI_1013D_tp_config.bin, FWB_FSI_1013.bin)[/li]
+[li]Turn off the scope and turn it back on. It should start normally.[/li]
+[/list]
+
+[size=16pt][color=orange]When the scope showed the "!! special touch panel detected !!" message please upload the "FNIRSI_1013D_tp_config.bin" file in this thread.[/color][/size]
+
+[color=red][size=12pt]If your scope uses a smaller SD card be warned that this is not tested yet. Only 8GB cards have been tested.[/size][/color]
+
+See the attached image for info on the sd card sectors. Screen cap from gparted.
+
