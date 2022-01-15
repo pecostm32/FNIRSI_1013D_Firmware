@@ -16,7 +16,7 @@ For a version without hte startup screen only two projects are needed:
 1) "fnirsi_1013d_startup_from_sd_card" which starts the FPGA and loads and executes the actual scope code
 2) "fnirsi_1013d_scope" this is the actual scope code
 
-The second option is the fastest since it does not wait to show the startup screen
+The second option is the fastest since it does not wait to show the startup screen, but this project has not been tested with the latest code.
 
 To load the new firmware on the scope one has to make sure the SD card is partioned correctly.
 
