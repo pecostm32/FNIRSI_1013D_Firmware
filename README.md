@@ -43,3 +43,6 @@ For more information take a look here:
 1) https://www.eevblog.com/forum/testgear/fnirsi-1013d-100mhz-tablet-oscilloscope/msg3807689/#msg3807689
 2) https://www.eevblog.com/forum/testgear/fnirsi-1013d-100mhz-tablet-oscilloscope/msg3809966/#msg3809966
 3) https://www.eevblog.com/forum/testgear/fnirsi-1013d-100mhz-tablet-oscilloscope/msg3908555/#msg3908555
+
+For a view at the history and the flash file packer tool look here:
+https://github.com/pecostm32/FNIRSI-1013D-Hack
