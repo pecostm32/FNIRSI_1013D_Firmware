@@ -5,6 +5,10 @@ This new firmware is offered without any warenty and I take no responsibility fo
 
 This repository is a result of the hacking of the original FNIRSI 1013D firmware. To make it easier to just get the new firmware code, this repository is created.
 
+During the hacking and development phase discoveries where made that there are differences between the oscilloscopes in the field. An important one is the different displays that are used. To make it work with these different models a sector on the SD card has been allocated to hold the display configuration. To this moment only one major deviation needed this mod. The more standard types can use the default configuration.
+
+In the "fnirsi_1013d_scope" dist folder there are a configuration files for both the deviated and the standard one. In the "How_to_load_scope.txt" file you can find the instructions for loading these files to the SD card.
+
 There are four folders with source code projects of which a minimum of two are needed to build a binary that can be loaded onto the SD card that is housed in the scope.
 
 For a version with a startup screen that shows PECOs sCOPE three projects are needed:
@@ -12,11 +16,11 @@ For a version with a startup screen that shows PECOs sCOPE three projects are ne
 2) "fnirsi_1013d_startup_screen" which shows the startup screen and loads and executes the actual scope code
 3) "fnirsi_1013d_scope" this is the actual scope code
 
-For a version without hte startup screen only two projects are needed:
+For a version without the startup screen only two projects are needed:
 1) "fnirsi_1013d_startup_from_sd_card" which starts the FPGA and loads and executes the actual scope code
 2) "fnirsi_1013d_scope" this is the actual scope code
 
-The second option is the fastest since it does not wait to show the startup screen, but this project has not been tested with the latest code.
+The second option is the fastest since it does not wait to show the startup screen, but this project has not been adapted for the new display configuration setup nor has it been tested with the latest code.
 
 To load the new firmware on the scope one has to make sure the SD card is partioned correctly.
 
