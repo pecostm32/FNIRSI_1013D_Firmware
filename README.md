@@ -1,7 +1,7 @@
 # FNIRSI_1013D_Firmware
 New firmware for the FNIRSI-1013D osciloscope.
 
-This new firmware is offered without any warenty and I take no responsibility for any damage.
+This new firmware is offered without any warrenty and I take no responsibility for any damage.
 
 This repository is a result of the hacking of the original FNIRSI 1013D firmware. To make it easier to just get the new firmware code, this repository is created.
 
