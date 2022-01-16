@@ -63,12 +63,6 @@ build: .build-post
 # Fix the BROM header
 	./mksunxi dist/Debug/GNU_ARM-Linux/fnirsi_1013d_scope.bin
 
-# EMULATOR package
-	./flashfilepacker -o ../../FNIRSI-1013D/Scope_emulator/scope_test_code.bin -i dist/Debug/GNU_ARM-Linux/fnirsi_1013d_scope.bin -l 0x27000
-	
-# FLASH firmware update package
-	./flashfilepacker -o dist/Debug/GNU_ARM-Linux/FSI-1013.bin -i dist/Debug/GNU_ARM-Linux/fnirsi_1013d_scope.bin -l 0x14000
-
 # SD card package
 	./flashfilepacker -o dist/Debug/GNU_ARM-Linux/fnirsi_1013d.bin -i dist/Debug/GNU_ARM-Linux/fnirsi_1013d_scope.bin -l 0x9800
 
