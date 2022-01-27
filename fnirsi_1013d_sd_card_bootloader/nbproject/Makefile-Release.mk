@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/5fc58e7f/bl_sd_card_interface.o \
+	${OBJECTDIR}/bl_sd_card_interface.o \
 	${OBJECTDIR}/ccu_control.o \
 	${OBJECTDIR}/dram_control.o \
 	${OBJECTDIR}/fnirsi_1013d_sd_card_bootloader.o \
@@ -69,10 +69,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/fnirsi_1013d_sd_card_bootloader: ${OB
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	arm-none-eabi-gcc -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/fnirsi_1013d_sd_card_bootloader ${OBJECTFILES} ${LDLIBSOPTIONS} -T./stm32f103-64k.ld -nostdlib
 
-${OBJECTDIR}/_ext/5fc58e7f/bl_sd_card_interface.o: ../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/5fc58e7f
+${OBJECTDIR}/bl_sd_card_interface.o: bl_sd_card_interface.c
+	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/5fc58e7f/bl_sd_card_interface.o ../fnirsi_1013d_firmware_backup_startup/bl_sd_card_interface.c
+	$(COMPILE.c) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/bl_sd_card_interface.o bl_sd_card_interface.c
 
 ${OBJECTDIR}/ccu_control.o: ccu_control.c
 	${MKDIR} -p ${OBJECTDIR}
