@@ -2,7 +2,6 @@
 
 #include "bl_sd_card_interface.h"
 #include "ccu_control.h"
-#include "timer.h"
 
 #include <string.h>
 
