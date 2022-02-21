@@ -16,7 +16,7 @@
 //Version info
 //----------------------------------------------------------------------------------------------------------------------------------
 
-#define VERSION_STRING             "V0.002"
+#define VERSION_STRING             "V0.003"
 
 #define VERSION_STRING_XPOS             690
 #define VERSION_STRING_YPOS              24
@@ -133,6 +133,11 @@
 #define MESSAGE_WAV_CHECKSUM_ERROR       13
 
 //----------------------------------------------------------------------------------------------------------------------------------
+//Number of bits used for fixed point calculations on the voltages
+
+#define VOLTAGE_SHIFTER                21
+
+//----------------------------------------------------------------------------------------------------------------------------------
 //Menu positions and dimensions
 //----------------------------------------------------------------------------------------------------------------------------------
 //Run and stop text
@@ -187,7 +192,6 @@
 #define ACQ_MENU_WIDTH                     304
 #define ACQ_MENU_HEIGHT                    336
 
-
 //----------------------------------------------------------------------------------------------------------------------------------
 //Typedefs
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -203,9 +207,14 @@ typedef struct tagThumbnailData         THUMBNAILDATA,        *PTHUMBNAILDATA;
 
 typedef struct tagPathInfo              PATHINFO,             *PPATHINFO;
 
-typedef struct tagTimeCalcData          TIMECALCDATA,         *PTIMECALCDATA;
+typedef struct tagScreenTimeCalcData    SCREENTIMECALCDATA,   *PSCREENTIMECALCDATA;
 typedef struct tagVoltCalcData          VOLTCALCDATA,         *PVOLTCALCDATA;
 typedef struct tagFreqCalcData          FREQCALCDATA,         *PFREQCALCDATA;
+typedef struct tagTimeCalcData          TIMECALCDATA,         *PTIMECALCDATA;
+
+//----------------------------------------------------------------------------------------------------------------------------------
+
+typedef void (*MEASUREMENTFUNCTION)(PCHANNELSETTINGS settings);
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //Structures
@@ -254,11 +263,11 @@ struct tagChannelSettings
   uint16 dc_calibration_offset[7];
   
   //Measurements
-  uint32 min;
-  uint32 max;
-  uint32 average;
-  uint32 center;
-  uint32 peakpeak;
+  int32  min;
+  int32  max;
+  int32  average;
+  int32  center;
+  int32  peakpeak;
   uint32 frequencyvalid;
   uint32 frequency;
   uint32 lowtime;
@@ -395,7 +404,7 @@ struct tagPathInfo
 
 //----------------------------------------------------------------------------------------------------------------------------------
 
-struct tagTimeCalcData
+struct tagScreenTimeCalcData
 {
   uint32 mul_factor;
   uint8  time_scale;
@@ -416,6 +425,14 @@ struct tagFreqCalcData
 {
   uint32 sample_rate;
   uint8  freq_scale;
+};
+        
+//----------------------------------------------------------------------------------------------------------------------------------
+
+struct tagTimeCalcData
+{
+  uint32 mul_factor;
+  uint8  time_scale;
 };
         
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -566,11 +583,13 @@ extern const uint32 time_per_div_matching[24];
 
 extern const uint32 samplerate_for_autosetup[4];
 
-extern const TIMECALCDATA time_calc_data[24];
+extern const SCREENTIMECALCDATA screen_time_calc_data[24];
 
 extern const VOLTCALCDATA volt_calc_data[3][7];
 
 extern const FREQCALCDATA freq_calc_data[18];
+
+extern const TIMECALCDATA time_calc_data[18];
 
 extern const char *magnitude_scaler[8];
 
@@ -594,6 +613,8 @@ extern const int8 time_div_text_x_offsets[24];
 
 extern const int8 *acquisition_speed_texts[18];
 extern const int8 acquisition_speed_text_x_offsets[18];
+
+extern const char *measurement_names[12];
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //For touch filtering on slider movement
@@ -647,6 +668,8 @@ extern uint16 displaybuffer1[SCREEN_SIZE];
 extern uint16 displaybuffer2[SCREEN_SIZE];
 
 extern uint16 gradientbuffer[SCREEN_HEIGHT];
+
+extern char measurementtext[20];
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //Fonts

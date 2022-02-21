@@ -839,7 +839,8 @@ void display_fill_rounded_rect(uint32 xpos, uint32 ypos, uint32 width, uint32 he
       ptr2 = displaydata.screenbuffer + ((ys * displaydata.pixelsperline) + xs);
       
       //Draw the pixels on the lines
-      for(x=xs;x<xe;x++)
+      //20-02-2022 Fix for wrong shape at the right side. x needs to become equal to xe
+      for(x=xs;x<=xe;x++)
       {
         //Set the top line current screen buffer pixel with the requested color
         *ptr1++ = displaydata.fg_color;

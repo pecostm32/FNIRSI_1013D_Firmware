@@ -178,10 +178,26 @@ void scope_display_channel_trace(PCHANNELSETTINGS settings);
 void scope_display_cursor_measurements(void);
 
 void scope_display_measurements(void);
+void scope_display_channel_measurements(PCHANNELSETTINGS settings, uint8 *measuresstate, uint32 xstart, uint32 color);
 
-void scope_print_value(char *buffer, uint32 value, uint32 scale, char *header, char *sign);
+void scope_display_vmax(PCHANNELSETTINGS settings);
+void scope_display_vmin(PCHANNELSETTINGS settings);
+void scope_display_vavg(PCHANNELSETTINGS settings);
+void scope_display_vrms(PCHANNELSETTINGS settings);
+void scope_display_vpp(PCHANNELSETTINGS settings);
+void scope_display_vp(PCHANNELSETTINGS settings);
+void scope_display_freq(PCHANNELSETTINGS settings);
+void scope_display_cycle(PCHANNELSETTINGS settings);
+void scope_display_time_plus(PCHANNELSETTINGS settings);
+void scope_display_time_min(PCHANNELSETTINGS settings);
+void scope_display_duty_plus(PCHANNELSETTINGS settings);
+void scope_display_duty_min(PCHANNELSETTINGS settings);
 
-char *scope_print_decimal(char *buffer, uint32 value, uint32 decimalplace);
+void scope_display_voltage(PCHANNELSETTINGS settings, int32 value);
+
+void scope_print_value(char *buffer, int32 value, uint32 scale, char *header, char *sign);
+
+char *scope_print_decimal(char *buffer, int32 value, uint32 decimalplace, uint32 negative);
 
 //----------------------------------------------------------------------------------------------------------------------------------
 // File display functions

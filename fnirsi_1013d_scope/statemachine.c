@@ -1533,7 +1533,7 @@ void handle_right_basic_menu_touch(void)
     display_set_destination_buffer(displaybuffer2);
     display_copy_rect_from_screen(231, 263, 499, 214);
 
-    //Go and setup the channel 1 menu
+    //Go and setup the measurements menu
     scope_open_measures_menu();
 
     //Go and handle the menu touch
@@ -1848,16 +1848,16 @@ void handle_right_volts_div_menu_touch(void)
 const TOUCHCOORDS measures_item_touch_coords[2][12] =
 {
   {
-    //Channel 1 coordinates are on the right
-    {482, 543, 289, 349}, {545, 605, 289, 349}, {607, 667, 289, 349}, {669, 729, 289, 349},
-    {482, 543, 351, 411}, {545, 605, 351, 411}, {607, 667, 351, 411}, {669, 729, 351, 411},
-    {482, 543, 413, 476}, {545, 605, 413, 476}, {607, 667, 413, 476}, {669, 729, 413, 476},
-  },
-  {
-    //Channel 2 coordinates are on the left
+    //Channel 1 coordinates are on the left
     {232, 293, 289, 349}, {295, 355, 289, 349}, {357, 417, 289, 349}, {418, 480, 289, 349},
     {232, 293, 351, 411}, {295, 355, 351, 411}, {357, 417, 351, 411}, {418, 480, 351, 411},
     {232, 293, 413, 476}, {295, 355, 413, 476}, {357, 417, 413, 476}, {418, 480, 413, 476},
+  },
+  {
+    //Channel 2 coordinates are on the right
+    {482, 543, 289, 349}, {545, 605, 289, 349}, {607, 667, 289, 349}, {669, 729, 289, 349},
+    {482, 543, 351, 411}, {545, 605, 351, 411}, {607, 667, 351, 411}, {669, 729, 351, 411},
+    {482, 543, 413, 476}, {545, 605, 413, 476}, {607, 667, 413, 476}, {669, 729, 413, 476},
   }
 };
 

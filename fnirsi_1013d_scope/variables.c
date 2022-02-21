@@ -56,6 +56,9 @@ uint16 displaybuffer2[SCREEN_SIZE];
 
 uint16 gradientbuffer[SCREEN_HEIGHT];
 
+//Buffer for formating text in
+char measurementtext[20];
+
 //----------------------------------------------------------------------------------------------------------------------------------
 //Scope data
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -349,7 +352,8 @@ const int8 *volt_div_texts[3][7] =
 //SW means done in software
 //                                       HW       HW       HW       HW       HW       HW        SW
 //                                       5V     2.5V       1V    500mV    200mV    100mV      50mV
-const int32 signal_adjusters[7] = { 7258042, 7341950, 7551720, 7551720, 7719536, 7719536, 15439072 };
+//const int32 signal_adjusters[7] = { 7258042, 7341950, 7551720, 7551720, 7719536, 7719536, 15439072 };
+const int32 signal_adjusters[7] = { 3629021, 3670975, 3775860, 3775860, 3859768, 3859768, 7719536 };
 
 const uint32 sample_rate_settings[18] =
 {
@@ -462,7 +466,8 @@ const uint32 timebase_settings[24] =
   411100,   //  5ns/div
 };
 
-const TIMECALCDATA time_calc_data[24] =
+//Table used for converting horizontal screen pixels to time based on the time per div setting
+const SCREENTIMECALCDATA screen_time_calc_data[24] =
 {
   {    400, 3, 3 },         //200ms/div
   {    200, 3, 3 },         //100ms/div
@@ -490,6 +495,7 @@ const TIMECALCDATA time_calc_data[24] =
   {  10000, 0, 6 }          //  5ns/div
 };
 
+//Table used for converting vertical screen pixels to voltage based on the volt per div setting(s)
 const VOLTCALCDATA volt_calc_data[3][7] =
 {
   { {  10000, 3 },  {  5000, 3 }, {  2000, 3 }, {  1000, 3 }, {  400, 3 }, {  200, 3 }, {  100, 3 } },
@@ -497,7 +503,7 @@ const VOLTCALCDATA volt_calc_data[3][7] =
   { {   1000, 4 },  {   500, 4 }, {   200, 4 }, {   100, 4 }, {   40, 4 }, {   20, 4 }, {   10, 4 } }
 };
 
-
+//Table for converting on samples based period time to frequency
 const FREQCALCDATA freq_calc_data[18] =
 {
   {   20000000, 5 },     //200MSa/s
@@ -520,8 +526,33 @@ const FREQCALCDATA freq_calc_data[18] =
   {   50000000, 3 }      // 500Sa/s
 };
 
+//Table used for converting on samples based time to actual time
+const TIMECALCDATA time_calc_data[18] =
+{
+  {      500,  1 },
+  {     1000,  1 },
+  {     2000,  1 },
+  {     5000,  1 },
+  {    10000,  1 },
+  {    20000,  1 },
+  {    50000,  1 },
+  {      100,  2 },
+  {      200,  2 },
+  {      500,  2 },
+  {     1000,  2 },
+  {     2000,  2 },
+  {     5000,  2 },
+  {    10000,  2 },
+  {    20000,  2 },
+  {    50000,  2 },
+  {      100,  3 },
+  {      200,  3 }
+};
+
+//Table for the different magnitudes for displaying time, frequency and voltage
 const char *magnitude_scaler[8] = { "p", "n", "u", "m", "", "K", "M", "G"};
 
+//Table for scaling between two volt per division settings. Used when looking at a waveform capture when the voltage per division setting is changed. (Stop mode or waveform view mode)
 const int32 vertical_scaling_factors[7][7] =
 {
   //Sample volt per div                                                         Display volt per div
@@ -546,6 +577,24 @@ const int32 vertical_scaling_factors[7][7] =
   
   //   *100       *50      *20         *10        *4         *2        /1
   { 1000000,   500000,  200000,     100000,    40000,     20000,    10000 },  //50mV/div
+};
+
+//----------------------------------------------------------------------------------------------------------------------------------
+
+const char *measurement_names[12] =
+{
+  "Vmax",
+  "Vmin",
+  "Vavg",
+  "Vrms",
+  "Vpp",
+  "Vp",
+  "Freg",
+  "Cycle",
+  "Time+",
+  "Time-",
+  "Duty+",
+  "Duty-"
 };
 
 //----------------------------------------------------------------------------------------------------------------------------------
