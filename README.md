@@ -9,6 +9,8 @@ During the hacking and development phase discoveries where made that there are d
 
 In the "fnirsi_1013d_scope" dist folder there are a configuration files for both the deviated and the standard one. In the "How_to_load_scope.txt" file you can find the instructions for loading these files to the SD card.
 
+Firmware is at this location: https://github.com/pecostm32/FNIRSI_1013D_Firmware/tree/main/fnirsi_1013d_scope/dist/Debug/GNU_ARM-Linux
+
 There are four folders with source code projects of which a minimum of two are needed to build a binary that can be loaded onto the SD card that is housed in the scope.
 
 For a version with a startup screen that shows PECOs sCOPE three projects are needed:
