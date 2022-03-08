@@ -1,0 +1,10 @@
+
+v0.004
+08 MARCH 2022
+Added the swapping of the touch X and or Y coordinates to the display configuration file
+
+v0.003
+Added the measurements
+
+v0.002
+Initial release of the new firmware
