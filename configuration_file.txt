@@ -1,0 +1,25 @@
+There are different models of the scope in the field. During production runs the manufacturer used different LCD panels and touch panels.
+To allow the firmware to be the same for al models a configuration file has been created.
+
+This file uses a validation scheme but only on the display data, since the touch panel configuration has been added later.
+
+The line below shows the configuration data for the standard display and touch panel
+0xAA 0xAA 0xAA 0xAA 0x55 0x55 0x55 0x55 0x4A 0x00 0x1E 0x04 0x17 0x00 0x1A 0x04 0xCC 0xCC 0xCC 0xCC 0x33 0x33 0x33 0x33 0x5F 0x00 0x38 0x08 0xFF 0xFF
+
+The byte order is little endian and thus least significant byte first.
+
+The first 8 bytes are a pre amble and need too be as shown. In the software these are seen as 32 bit values 0xAAAAAAAA and 0x55555555
+The next 4 bytes are the horizontal timing setting. In the software this is also seen as a 32 bit value. 0x041E004A
+The following 4 bytes are the vertical timing. In the software this is also seen as a 32 bit value. 0x041A0017
+Then an 8 bytes posat amble follows. In the software these are seen as 32 bit values 0xCCCCCCCC and 0x33333333
+The next 4 bytes are a checksum over the first 6 32 bit values. It is a simple sum of these unsigned integers.
+
+For controlling the touch panel the next two bytes are used. In the original configuration files these are defaulted to 0xFF, so as such no swap.
+When set to zero (0x00) the cooradinates are swapped. The first byte is for the X coordinate and the second byte for the Y coordinate.
+
+For the display the following values have been seen in the different versions of the original firmware
+  1014D new version 0x041E0043, 0x041A0019
+  1014D old version 0x041E006D, 0x041A0022
+  1013D version 1   0x041E0044, 0x041A0017
+  1013D version 2   0x041E004A, 0x041A0017   Most common version??
+  1013D version 3   0x041E0072, 0x041A001F
