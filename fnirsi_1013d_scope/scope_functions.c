@@ -4286,8 +4286,8 @@ void scope_acquire_trace_data(void)
 
     //Only need a single count variable for both channels, since they run on the same sample rate
     //This can be changed to a global define
-    scopesettings.nofsamples  = 1500;
-    scopesettings.samplecount = 3000;
+    scopesettings.nofsamples  = SAMPLES_PER_ADC;
+    scopesettings.samplecount = SAMPLE_COUNT;
 
     //Check if channel 1 is enabled
     if(scopesettings.channel1.enable)
@@ -4397,8 +4397,8 @@ uint32 scope_do_baseline_calibration(void)
 
   //Set number of samples
   //This can be changed to a global define
-  scopesettings.samplecount = 3000;
-  scopesettings.nofsamples  = 1500;
+  scopesettings.samplecount = SAMPLE_COUNT;
+  scopesettings.nofsamples  = SAMPLES_PER_ADC;
 
   //Send the command for setting the trigger level to the FPGA
   fpga_write_cmd(0x17);
@@ -4674,8 +4674,8 @@ void scope_do_auto_setup(void)
 
   //Set number of samples
   //This can be changed to a global define
-  scopesettings.samplecount = 3000;
-  scopesettings.nofsamples  = 1500;
+  scopesettings.samplecount = SAMPLE_COUNT;
+  scopesettings.nofsamples  = SAMPLES_PER_ADC;
 
   //Send the command for setting the trigger level to the FPGA
   fpga_write_cmd(0x17);

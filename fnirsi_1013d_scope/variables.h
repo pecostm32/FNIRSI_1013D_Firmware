@@ -16,7 +16,7 @@
 //Version info
 //----------------------------------------------------------------------------------------------------------------------------------
 
-#define VERSION_STRING             "V0.003"
+#define VERSION_STRING             "V0.004"
 
 #define VERSION_STRING_XPOS             690
 #define VERSION_STRING_YPOS              24
@@ -191,6 +191,15 @@
 #define ACQ_MENU_YPOS                       46
 #define ACQ_MENU_WIDTH                     304
 #define ACQ_MENU_HEIGHT                    336
+
+//----------------------------------------------------------------------------------------------------------------------------------
+// Sampling system
+
+#define MAX_SAMPLE_BUFFER_SIZE            3000
+#define UINT32_SAMPLE_BUFFER_SIZE         (MAX_SAMPLE_BUFFER_SIZE / 4)
+
+#define SAMPLE_COUNT                      MAX_SAMPLE_BUFFER_SIZE
+#define SAMPLES_PER_ADC                   (SAMPLE_COUNT / 2)
 
 //----------------------------------------------------------------------------------------------------------------------------------
 //Typedefs
@@ -463,6 +472,11 @@ extern uint8  havetouch;
 extern uint16 xtouch;
 extern uint16 ytouch;
 
+extern uint8 xswap;
+extern uint8 yswap;
+
+extern uint8 config_valid;
+
 //----------------------------------------------------------------------------------------------------------------------------------
 //State machine data
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -497,11 +511,11 @@ CHANNELSETTINGS calibrationsettings;
 extern SCOPESETTINGS savedscopesettings1;
 extern SCOPESETTINGS savedscopesettings2;
 
-extern uint32 channel1tracebuffer[750];
+extern uint32 channel1tracebuffer[UINT32_SAMPLE_BUFFER_SIZE];
 
 extern DISPLAYPOINTS channel1pointsbuffer[730];
 
-extern uint32 channel2tracebuffer[750];
+extern uint32 channel2tracebuffer[UINT32_SAMPLE_BUFFER_SIZE];
 
 extern DISPLAYPOINTS channel2pointsbuffer[730];
 

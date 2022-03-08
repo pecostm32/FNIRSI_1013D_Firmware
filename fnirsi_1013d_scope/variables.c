@@ -23,6 +23,12 @@ uint8  havetouch;
 uint16 xtouch;
 uint16 ytouch;
 
+//To allow for the different touch panel configurations in the field these variables can be controlled in the display configuration file
+uint8 xswap;
+uint8 yswap;
+
+uint8 config_valid;
+
 //----------------------------------------------------------------------------------------------------------------------------------
 //State machine data
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -72,11 +78,11 @@ CHANNELSETTINGS calibrationsettings;
 SCOPESETTINGS savedscopesettings1;
 SCOPESETTINGS savedscopesettings2;
 
-uint32 channel1tracebuffer[750];
+uint32 channel1tracebuffer[UINT32_SAMPLE_BUFFER_SIZE];
 
 DISPLAYPOINTS channel1pointsbuffer[730];      //Buffer to store the x,y positions of the trace on the display
 
-uint32 channel2tracebuffer[750];
+uint32 channel2tracebuffer[UINT32_SAMPLE_BUFFER_SIZE];
 
 DISPLAYPOINTS channel2pointsbuffer[730];      //Buffer to store the x,y positions of the trace on the display
 

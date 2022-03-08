@@ -15,6 +15,10 @@
 #include "touchpanel.h"
 
 //----------------------------------------------------------------------------------------------------------------------------------
+
+#define TOUCH_CONFIG_ADDRESS       (uint8 *)0x81BFFC1C
+
+//----------------------------------------------------------------------------------------------------------------------------------
 //Touch panel configuration for the GT9157 set to 800x480 resolution
 
 #ifdef USE_TP_CONFIG
@@ -60,6 +64,9 @@ uint8 tp_config_data[] =
 void tp_i2c_setup(void)
 {
   uint8 command;
+
+  //08-03-2022. Added for configurable X and Y coordinate swap
+  uint8 *ptr = TOUCH_CONFIG_ADDRESS;
 
 #ifdef USE_TP_CONFIG
   uint8 checksum;
@@ -130,6 +137,20 @@ void tp_i2c_setup(void)
   xscaler = (800 << 20) / xmax;
   yscaler = (480 << 20) / ymax;
 #endif
+
+  //08-03-2022. Added for configurable X and Y coordinate swap
+  if(config_valid == 1)
+  {
+    //When there is a valid configuration found use the given settings
+    xswap = ptr[0];
+    yswap = ptr[1];
+  }
+  else
+  {
+    //When there is no valid configuration found use the default settings
+    xswap = 0xFF;
+    yswap = 0xFF;
+  }
   
   //Wait for ~100mS
   tp_delay(200000);
@@ -185,6 +206,20 @@ void tp_i2c_read_status(void)
       xtouch = (xscaler * xtouch) >> 20;
       ytouch = (yscaler * ytouch) >> 20;
 #endif
+      
+      //08-03-2022. Added for configurable X and Y coordinate swap
+      //Default swap setting is not zero because the original configuration data has 0xFF in these bytes.
+      if(xswap == 0)
+      {
+        //When X swap is needed invert the X coordinate
+        xtouch = 800 - xtouch;
+      }
+
+      if(yswap == 0)
+      {
+        //When Y swap is needed invert the Y coordinate
+        ytouch = 480 - ytouch;
+      }
       
       //Signal touch active
       havetouch = 1;

@@ -10,7 +10,7 @@
 
 //----------------------------------------------------------------------------------------------------------------------------------
 
-#define DISPLAY_CONFIG_ADDRESS    (uint32*)0x81BFFC00
+#define DISPLAY_CONFIG_ADDRESS    (uint32 *)0x81BFFC00
 
 //----------------------------------------------------------------------------------------------------------------------------------
 
@@ -160,15 +160,21 @@ void sys_init_display(uint16 xsize, uint16 ysize, uint16 *address)
 
     //Vertical front porch and vertical back porch
     *TCON0_BASIC_TIMING2 = ptr[3];
+    
+    //08-03-2022. Added for touch panel configuration option
+    config_valid = 1;
   }
   else
   {
     //Use the default configuration
     //Horizontal total time and horizontal back porch
-    *TCON0_BASIC_TIMING1 = 0x41E0044;
+    *TCON0_BASIC_TIMING1 = 0x041E0044;
 
     //Vertical front porch and vertical back porch
-    *TCON0_BASIC_TIMING2 = 0x41A0017;
+    *TCON0_BASIC_TIMING2 = 0x041A0017;
+    
+    //08-03-2022. Added for touch panel configuration option
+    config_valid = 0;
   }
   
   //18--11-2021
