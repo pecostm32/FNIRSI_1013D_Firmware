@@ -23,3 +23,10 @@ For the display the following values have been seen in the different versions of
   1013D version 1   0x041E0044, 0x041A0017
   1013D version 2   0x041E004A, 0x041A0017   Most common version??
   1013D version 3   0x041E0072, 0x041A001F
+
+
+The configuration file needs to be written to the SD card at sector 710.
+
+On linux depending on the actual block device the scope is connected to the command is:
+
+sudo dd if=standard_display_tp_xy_swap_config_sector.bin of=/dev/sdc bs=1024 seek=355
