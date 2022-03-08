@@ -7,7 +7,9 @@ This repository is a result of the hacking of the original FNIRSI 1013D firmware
 
 During the hacking and development phase discoveries where made that there are differences between the oscilloscopes in the field. An important one is the different displays that are used. To make it work with these different models a sector on the SD card has been allocated to hold the display configuration. To this moment only one major deviation needed this mod. The more standard types can use the default configuration.
 
-In the "fnirsi_1013d_scope" dist folder there are a configuration files for both the deviated and the standard one. In the "How_to_load_scope.txt" file you can find the instructions for loading these files to the SD card.
+In the "fnirsi_1013d_scope" dist folder there are the configuration files for both the deviated and the standard one. In the "How_to_load_scope.txt" file you can find the instructions for loading these files to the SD card. The file "configuration_file.txt" explains the configuration file.
+
+In version 0.004 extra settings are added to the display configuration file to allow for swapping the touch coordinates.
 
 Firmware is at this location: https://github.com/pecostm32/FNIRSI_1013D_Firmware/tree/main/fnirsi_1013d_scope/dist/Debug/GNU_ARM-Linux
 
