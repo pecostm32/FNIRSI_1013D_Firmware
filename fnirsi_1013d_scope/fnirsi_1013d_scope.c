@@ -143,6 +143,19 @@ int main(void)
 
   //Setup the main parts of the screen
   scope_setup_main_screen();
+  
+  //Modification on 09-03-2022. Begin
+  //Clear the sample memory
+  memset(channel1tracebuffer, 128, sizeof(channel1tracebuffer));
+  memset(channel2tracebuffer, 128, sizeof(channel2tracebuffer));
+  
+  //Set the number of samples in use
+  scopesettings.nofsamples  = SAMPLES_PER_ADC;
+  scopesettings.samplecount = SAMPLE_COUNT;
+  
+  //Show initial trace data. When in NORMAL or SINGLE mode the display needs to be drawn because otherwise if there is no signal it remains black
+  scope_display_trace_data();
+  //End 09-03-2022
 
   //Set screen brightness
   fpga_set_translated_brightness();

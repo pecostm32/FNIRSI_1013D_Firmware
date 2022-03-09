@@ -4671,6 +4671,23 @@ void scope_do_auto_setup(void)
 
   //Disable the trigger circuit
   scopesettings.samplemode = 0;
+  
+  //Modification on 09-03-2022. Begin
+  //Switch back to AUTO trigger mode to avoid lockup in NORMAL or SINGLE mode
+  scopesettings.triggermode = 0;
+  
+  //Show it on the display
+  scope_trigger_settings(0);
+  
+  //Also set the FPGA to the AUTO trigger mode
+  fpga_set_trigger_mode();
+  
+  //To make sure the scope will be running after auto set, set the run mode to running
+  scopesettings.runstate = 0;
+  
+  //Show this on the screen
+  scope_run_stop_text();
+  //End. 09-03-2022
 
   //Set number of samples
   //This can be changed to a global define

@@ -16,7 +16,7 @@
 //Version info
 //----------------------------------------------------------------------------------------------------------------------------------
 
-#define VERSION_STRING             "V0.004"
+#define VERSION_STRING             "V0.005"
 
 #define VERSION_STRING_XPOS             690
 #define VERSION_STRING_YPOS              24
