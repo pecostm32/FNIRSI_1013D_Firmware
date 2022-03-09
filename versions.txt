@@ -1,3 +1,7 @@
+v0.005
+09 MARCH 2022
+Added code to the auto setup function to switch back to AUTO mode. This is needed because in NORMAL or SINGLE mode it froze on using this function.
+Also added some initialization code to have the scope start with a full screen when in NORMAL or SINGLE mode. Before, in this case, the signal part of the scope screen remained black in absense of a trigger.
 
 v0.004
 08 MARCH 2022
