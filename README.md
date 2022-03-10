@@ -39,13 +39,18 @@ To load the new firmware on the scope one has to make sure the SD card is partio
 9)  Open gparted and check if the device is properly formated. (Use right mouse and information to see the sector info)
 10) If not delete the partition and make a new one leaving 1M free at the start. Format is fat32.
 11) When the partition remounts after the previous step un-mount it again.
-12) Use dd to place the backup package on the SD card. ("sudo dd if=fnirsi_1013d.bin of=/dev/sdc bs=1024 seek=8")
+12) Use dd to place the firmware package on the SD card. ("sudo dd if=fnirsi_1013d.bin of=/dev/sdc bs=1024 seek=8")
 13) This will re-mount the partition. Un-mount the partition again. ("sudo umount /dev/sdc1" in my case)
 14) Turn of the scope and turn it back on. This will start the new scope firmware
 
 Removing the new firmware is easy:
 1) Perform the first steps of the install. (1,2,3,4,5,7)
 2) Remove the program with "sudo dd if=/dev/zero of=/dev/sdc bs=1024 seek=8 count=1"
+
+Further updates of the firmware don't require the partitioning, since that is already correctly setup for the first time of loading the new firmware.
+So skip steps 6,8,9,10,11.
+
+When using a SD card reader/writer directly coupled to your Linux machine don't forget to use the umount command. It is needed to have dd work properly.
 
 For more information take a look here:
 1) https://www.eevblog.com/forum/testgear/fnirsi-1013d-100mhz-tablet-oscilloscope/msg3807689/#msg3807689
