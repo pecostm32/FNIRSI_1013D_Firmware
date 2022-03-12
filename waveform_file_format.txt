@@ -1,0 +1,43 @@
+The waveform file holds both settings and signal data. The first 800 bytes are for the settings. The settings are stored as little endian 32 bit integers.
+Then follows the signal data for channel 1, which is 3000 bytes and after that 3000 bytes for the channel 2 data. All samples are single byte values.
+
+The settings part holds the following data:
+
+Byte offset      Value                       Channel
+          0      Checksum                          x
+          4      File version                      x
+         40      Enable                            1
+         44      Display volt per division         1
+         48      Sample volt per division          1
+         52      FFT enable                        1
+         56      AC / DC coupling                  1
+         60      Probe magnification               1
+         64      Trace position on screen          1
+         68      Minimum measured                  1
+         72      Maximum measured                  1
+         76      Average measured                  1
+         80      Center value measured             1
+         84      Peak peak value measured          1
+         88      Frequency valid                   1
+         92      Frequency determined              1
+         96      Average Low time measured         1
+        100      Average high time measured        1
+        104      Average periode time measured     1
+        160      Enable                            2
+        164      Display volt per division         2
+        168      Sample volt per division          2
+        172      FFT enable                        2
+        176      AC / DC coupling                  2
+        180      Probe magnification               2
+        184      Trace position on screen          2
+        188      Minimum measured                  2
+        192      Maximum measured                  2
+        196      Average measured                  2
+        200      Center value measured             2
+        204      Peak peak value measured          2
+        208      Frequency valid                   2
+        212      Frequency determined              2
+        216      Average Low time measured         2
+        220      Average high time measured        2
+        224      Average periode time measured     2
+        
