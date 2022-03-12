@@ -1,17 +1,21 @@
 The waveform file holds both settings and signal data. The first 800 bytes are for the settings. The settings are stored as little endian 32 bit integers.
 Then follows the signal data for channel 1, which is 3000 bytes and after that 3000 bytes for the channel 2 data. All samples are single byte values.
 
+The checksum is calculated over all the data. It sums the 32 bit integers. It starts with 0 and also adds the not used in between words. The sample data is added in 4 byte chunks.
+
+Look at the function "void scope_prepare_setup_for_file(void)" in the file "scope_functions.c" for how it is done.
+
 The settings part holds the following data:
 
 Byte offset      Value                       Channel
           0      Checksum                          x
           4      File version                      x
           
-         40      Enable                            1
-         44      Display volt per division         1
-         48      Sample volt per division          1
-         52      FFT enable                        1
-         56      AC / DC coupling                  1
+         40      Enable                            1       (0 not enabled, 1 enabled)
+         44      Display volt per division         1       (Volt per division setting for what is displayed. Range 0 - 6)
+         48      Sample volt per division          1       (Volt per division setting for what is sampled. Range 0 - 6)
+         52      FFT enable                        1       (0 not enabled, 1 enabled)
+         56      AC / DC coupling                  1       (0 DC, 1 AC)
          60      Probe magnification               1
          64      Trace position on screen          1
          68      Minimum measured                  1
