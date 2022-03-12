@@ -26,6 +26,8 @@ For a version without the startup screen only two projects are needed:
 
 The second option is the fastest since it does not wait to show the startup screen, but this project has not been adapted for the new display configuration setup nor has it been tested with the latest code.
 
+!!! Be aware that all actions with the SD card mentioned below are done on the block device and not a partition. So for example /dev/sdc and not /dev/sdc1 !!!
+
 To load the new firmware on the scope one has to make sure the SD card is partioned correctly.
 
 1)  Connect the scope to the computer via USB.
