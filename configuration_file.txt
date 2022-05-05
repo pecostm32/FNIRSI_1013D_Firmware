@@ -11,7 +11,7 @@ The byte order is little endian and thus least significant byte first.
 The first 8 bytes are a pre amble and need too be as shown. In the software these are seen as 32 bit values 0xAAAAAAAA and 0x55555555
 The next 4 bytes are the horizontal timing setting. In the software this is also seen as a 32 bit value. 0x041E004A
 The following 4 bytes are the vertical timing. In the software this is also seen as a 32 bit value. 0x041A0017
-Then an 8 bytes posat amble follows. In the software these are seen as 32 bit values 0xCCCCCCCC and 0x33333333
+Then an 8 bytes post amble follows. In the software these are seen as 32 bit values 0xCCCCCCCC and 0x33333333
 The next 4 bytes are a checksum over the first 6 32 bit values. It is a simple sum of these unsigned integers.
 
 For controlling the touch panel the next two bytes are used. In the original configuration files these are defaulted to 0xFF, so as such no swap.
@@ -27,6 +27,6 @@ For the display the following values have been seen in the different versions of
 
 The configuration file needs to be written to the SD card at sector 710.
 
-On linux depending on the actual block device the scope is connected to the command is:
+On linux depending on the actual block device the scope is connected to, the command is:
 
 sudo dd if=standard_display_tp_xy_swap_config_sector.bin of=/dev/sdc bs=1024 seek=355
