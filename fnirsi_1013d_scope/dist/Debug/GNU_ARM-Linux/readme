@@ -1,0 +1,5 @@
+The file fnirsi_1013d.bin is the firmware to load on the SD card.
+
+The other file fnirsi_1013d_scope.bin can be loaded to DRAM with sunxi-fel and the scope in FEL mode to do testing without writing to the SD card.
+
+The remaining bin files are the configuration files for the different display and touch panel hardware out there.
