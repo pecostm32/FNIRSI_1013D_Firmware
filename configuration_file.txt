@@ -17,6 +17,8 @@ The next 4 bytes are a checksum over the first 6 32 bit values. It is a simple s
 For controlling the touch panel the next two bytes are used. In the original configuration files these are defaulted to 0xFF, so as such no swap.
 When set to zero (0x00) the cooradinates are swapped. The first byte is for the X coordinate and the second byte for the Y coordinate.
 
+These new bytes are not covered by the checksum!!
+
 For the display the following values have been seen in the different versions of the original firmware
   1014D new version 0x041E0043, 0x041A0019
   1014D old version 0x041E006D, 0x041A0022
@@ -30,3 +32,7 @@ The configuration file needs to be written to the SD card at sector 710.
 On linux depending on the actual block device the scope is connected to, the command is:
 
 sudo dd if=standard_display_tp_xy_swap_config_sector.bin of=/dev/sdc bs=1024 seek=355
+
+Don't forget to unmount the partition before using dd.
+
+sudo umount /dev/sdc1
