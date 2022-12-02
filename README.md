@@ -61,3 +61,5 @@ For more information take a look here:
 
 For a view at the history and the flash file packer tool look here:
 https://github.com/pecostm32/FNIRSI-1013D-Hack
+
+The V0.005_Windows.7z file is from an external source and is not verified by me but EEVBlog members have used it.
