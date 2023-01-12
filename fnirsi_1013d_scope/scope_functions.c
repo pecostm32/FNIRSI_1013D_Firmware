@@ -5653,22 +5653,8 @@ void scope_display_vavg(PCHANNELSETTINGS settings)
 
 void scope_display_vrms(PCHANNELSETTINGS settings)
 {
-  //Determine the two absolute extremes
-  int32 min = 128 - settings->min;
-  int32 max = settings->max - 128;
-  int32 vrms = max;
-  
-  //Use the biggest of the two
-  if(min > max)
-  {
-    vrms = min;
-  }
-  
-  //Calculate the root mean square
-  vrms = (vrms * 7071) / 10000;
-  
-  //Use the below the center value when it is the biggest
-  scope_display_voltage(settings, vrms);
+  //The rms has already been centered during the summation so use it as is
+  scope_display_voltage(settings, settings->rms);
 }
 
 //----------------------------------------------------------------------------------------------------------------------------------
