@@ -16,7 +16,7 @@
 //Version info
 //----------------------------------------------------------------------------------------------------------------------------------
 
-#define VERSION_STRING             "V0.005"
+#define VERSION_STRING             "V0.006"
 
 #define VERSION_STRING_XPOS             690
 #define VERSION_STRING_YPOS              24
@@ -277,6 +277,7 @@ struct tagChannelSettings
   int32  average;
   int32  center;
   int32  peakpeak;
+  uint32 rms;
   uint32 frequencyvalid;
   uint32 frequency;
   uint32 lowtime;
@@ -506,7 +507,7 @@ extern FATFS fs;
 
 extern SCOPESETTINGS scopesettings;
 
-CHANNELSETTINGS calibrationsettings;
+extern CHANNELSETTINGS calibrationsettings;
 
 extern SCOPESETTINGS savedscopesettings1;
 extern SCOPESETTINGS savedscopesettings2;

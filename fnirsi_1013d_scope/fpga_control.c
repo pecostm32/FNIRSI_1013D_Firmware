@@ -564,6 +564,29 @@ uint16 fpga_prepare_for_transfer(void)
 
 //----------------------------------------------------------------------------------------------------------------------------------
 
+//See https://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Binary_numeral_system_.28base_2.29
+uint32 isqrt(uint32 n) {
+  uint32 x = n;
+  uint32 c = 0;
+  uint32 d = 1 << 30;
+
+  while (d > n) d >>= 2;
+
+  while (d != 0) {
+    if (x >= c + d) {
+      x -= c + d;
+      c = (c >> 1) + d;
+    } else {
+      c >>= 1;
+    }
+    d >>= 2;
+  }
+
+  return c;
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------
+
 void fpga_read_sample_data(PCHANNELSETTINGS settings, uint32 triggerpoint)
 {
   uint32 threshold;
@@ -572,6 +595,7 @@ void fpga_read_sample_data(PCHANNELSETTINGS settings, uint32 triggerpoint)
   settings->min     = 0x7FFFFFFF;
   settings->max     = 0;
   settings->average = 0;
+  settings->rms     = 0;
   
   //Send command 0x1F to the FPGA followed by the translated data returned from command 0x14
   fpga_write_cmd(0x1F);
@@ -644,6 +668,9 @@ void fpga_read_sample_data(PCHANNELSETTINGS settings, uint32 triggerpoint)
   
   //Calculate the overall average
   settings->average /= scopesettings.samplecount;
+
+  //Calculate the RMS
+  settings->rms = isqrt(settings->rms / scopesettings.samplecount);
 
   //Calculate the peak to peak value
   settings->peakpeak = settings->max - settings->min;
@@ -776,6 +803,9 @@ void fpga_read_adc_data(PCHANNELSETTINGS settings)
     
     //Add the samples for average calculation
     settings->average += sample;
+
+	//Add squares of the samples for RMS calculation
+	settings->rms += (sample - 128) * (sample - 128);
     
     //Store the data
     *settings->buffer = sample;
