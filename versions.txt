@@ -1,3 +1,7 @@
+v0.006
+12 JANUARY 2023
+The RMS measurement has been improved by Michal Derkacz (ziutek).
+
 v0.005
 09 MARCH 2022
 Added code to the auto setup function to switch back to AUTO mode. This is needed because in NORMAL or SINGLE mode it froze on using this function.
