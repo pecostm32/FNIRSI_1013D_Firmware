@@ -63,3 +63,8 @@ For a view at the history and the flash file packer tool look here:
 https://github.com/pecostm32/FNIRSI-1013D-Hack
 
 The V0.005_Windows.7z file is from an external source and is not verified by me but EEVBlog members have used it.
+
+---------------------------------------------------------------------------------------------------------------------
+Januari 12 2023
+Merged in a change made Michal Derkacz (ziutek) who improved on the RMS measurement. This brings the version op to
+V0.006. There is no image file for it like the V0.005_Windows.7z file, so the binary https://github.com/pecostm32/FNIRSI_1013D_Firmware/tree/main/fnirsi_1013d_scope/dist/Debug/GNU_ARM-Linux/fnirsi_1013d.bin needs to be used.
