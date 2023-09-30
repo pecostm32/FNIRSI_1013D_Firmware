@@ -3,6 +3,8 @@ New firmware for the FNIRSI-1013D osciloscope.
 
 This new firmware is offered without any warrenty and I take no responsibility for any damage.
 
+!!! It is only suited for the 1013D. It won't work on the 1014D. !!!
+
 This repository is a result of the hacking of the original FNIRSI 1013D firmware. To make it easier to just get the new firmware code, this repository is created.
 
 During the hacking and development phase discoveries where made that there are differences between the oscilloscopes in the field. An important one is the different displays that are used. To make it work with these different models a sector on the SD card has been allocated to hold the display configuration. To this moment only one major deviation needed this mod. The more standard types can use the default configuration.
