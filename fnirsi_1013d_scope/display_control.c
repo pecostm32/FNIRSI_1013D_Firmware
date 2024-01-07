@@ -55,7 +55,7 @@ void sys_init_display(uint16 xsize, uint16 ysize, uint16 *address)
   
   //Setup the used port D pins for LCD
   *PORTD_CFG0_REG = 0x22222227;   //PD00 is not used for the display
-  *PORTD_CFG1_REG = 0x22222227;   //PD12 is not used for the display
+  *PORTD_CFG1_REG = 0x22272222;   //PD12 is not used for the display
   *PORTD_CFG2_REG = 0x00222222;   //Only 22 pins for port D
    
   //Clear the display memory (Set in bytes so twice the number of pixels)
