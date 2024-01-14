@@ -649,7 +649,7 @@ const uint8 bmpheader[PICTURE_HEADER_SIZE] =
   (PICTURE_HEADER_SIZE >> 24) & 0xFF,
 
   //Size of DIB header
-  56, 0, 0, 0,
+  40, 0, 0, 0,
 
   //Bitmap width in pixels
    800        & 0xFF,
