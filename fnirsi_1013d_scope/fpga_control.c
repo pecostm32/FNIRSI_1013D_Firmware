@@ -396,7 +396,6 @@ void fpga_swap_trigger_channel(void)
 
 void fpga_set_trigger_level(void)
 {
-  uint32 voltperdiv;
   uint32 traceposition;
   int32  level;
   
@@ -408,18 +407,16 @@ void fpga_set_trigger_level(void)
   if(scopesettings.triggerchannel == 0)
   {
     //Channel 1, so use its data
-    voltperdiv    = scopesettings.channel1.samplevoltperdiv;
     traceposition = scopesettings.channel1.traceposition;
   }
   else
   {
     //Channel 2, so use its data
-    voltperdiv    = scopesettings.channel2.samplevoltperdiv;
     traceposition = scopesettings.channel2.traceposition;
   }
   
   //The difference between the two positions determines the level offset on 128, but it needs to be scaled back first
-  level = ((((int32)scopesettings.triggerverticalposition - (int32)traceposition) * 4194304) / signal_adjusters[voltperdiv]) + 128;
+  level = ((((int32)scopesettings.triggerverticalposition - (int32)traceposition) * 128) / 200) + 128;
 
   //Set the new level in the settings
   scopesettings.triggerlevel = level;
